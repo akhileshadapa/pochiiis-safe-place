@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#161224" />
+  <title>Pochiiii's Safe Place 🌙</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="stars" aria-hidden="true"></div>
+
+  <main id="app">
+    <section id="welcome" class="screen active">
+      <div class="moon-glow"></div>
+      <div class="welcome-card glass">
+        <div class="tiny">a little corner of the internet, just for you</div>
+        <div class="moon">☾</div>
+        <h1>Pochiiii's<br><span>Safe Place</span></h1>
+        <p class="lead">Hey, Pochiiii.</p>
+        <p>I know things haven't been easy lately.</p>
+        <p>So I made you a little place you can come to whenever you need it.</p>
+        <p>You don't have to reply.<br>You don't have to explain anything.</p>
+        <p>Just come here, take a breath, and stay for a while.</p>
+        <p class="heart-line">You're not alone. <span>♥</span></p>
+        <button class="primary" data-enter>Enter my safe place <span>→</span></button>
+      </div>
+    </section>
+
+    <section id="room" class="screen">
+      <div class="room-wrap">
+        <div class="room-title">
+          <span>POCHIiiii's room</span>
+          <small>click around · there are little things hidden everywhere</small>
+        </div>
+
+        <div class="room">
+          <div class="wall"></div>
+          <div class="floor"></div>
+          <div class="window" data-panel="windowPanel" tabindex="0" role="button">
+            <div class="window-sky"><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="window-moon">☾</div>
+            <div class="window-hills"></div>
+          </div>
+
+          <button class="photo photo1" data-panel="galleryPanel" aria-label="Open photos"><img src="assets/photos/photo-01.jpg" alt="Memory placeholder"><span>our little memories</span></button>
+          <button class="photo photo2" data-panel="galleryPanel" aria-label="Open photos"><img src="assets/photos/photo-02.jpg" alt="Memory placeholder"></button>
+          <button class="photo photo3" data-panel="galleryPanel" aria-label="Open photos"><img src="assets/photos/photo-03.jpg" alt="Memory placeholder"></button>
+
+          <button class="lamp object" data-panel="lampPanel" aria-label="Click lamp">⌁<span>lamp</span></button>
+
+          <div class="desk">
+            <button class="letter-box object" data-panel="lettersPanel" aria-label="Open when letters">
+              <span class="box-lid">♥</span><span class="box-body"></span>
+              <b>open<br>when...</b>
+            </button>
+            <button class="phone object" data-panel="phonePanel" aria-label="Open phone">
+              <span class="phone-screen">♡<small>tap me</small></span>
+            </button>
+            <button class="notebook object" data-panel="notebookPanel" aria-label="Open notebook">✎<small>little things</small></button>
+          </div>
+
+          <button class="teddy object" data-panel="hugPanel" aria-label="Hug the teddy">
+            <span class="ear left"></span><span class="ear right"></span><span class="face">•ᴗ•</span><span class="body"></span>
+            <small>click me</small>
+          </button>
+
+          <div class="rug"></div>
+          <div class="plant">🌿</div>
+          <div class="fairy-lights">· · · · · · · · ·</div>
+        </div>
+
+        <button class="exit" data-back>← leave room</button>
+      </div>
+    </section>
+  </main>
+
+  <div id="overlay" class="overlay">
+    <div class="panel-shell">
+      <button class="close" data-close aria-label="Close">×</button>
+      <div id="panelContent"></div>
+    </div>
+  </div>
+
+  <template id="lettersTemplate">
+    <div class="panel-head"><span class="eyebrow">for the days you need a little extra love</span><h2>Open When…</h2><p>Pick one. Put your headphones on. Take your time. ♡</p></div>
+    <div class="letter-grid">
+      <button class="envelope" data-audio="crying"><span>♡</span><b>Open when you need to cry</b><small>there's no need to be strong all the time</small></button>
+      <button class="envelope" data-audio="hug"><span>🫂</span><b>Open when you need a hug</b><small>a tiny piece of comfort, from me to you</small></button>
+      <button class="envelope" data-audio="sleep"><span>☾</span><b>Open when you can't sleep</b><small>let's make the night a little softer</small></button>
+      <button class="envelope" data-audio="overthinking"><span>☁</span><b>Open when you're overthinking</b><small>pause. breathe. one thing at a time.</small></button>
+      <button class="envelope" data-audio="laugh"><span>✦</span><b>Open when you need to laugh</b><small>warning: stupid memories incoming</small></button>
+      <button class="envelope" data-audio="alone"><span>♡</span><b>Open when you feel alone</b><small>you matter more than you know</small></button>
+      <button class="envelope" data-audio="motivation"><span>★</span><b>Open when you need motivation</b><small>borrow some belief from me</small></button>
+      <button class="envelope" data-audio="miss-us"><span>∞</span><b>Open when you miss our conversations</b><small>for all our nonsense and memories</small></button>
+    </div>
+    <p class="panel-note">🎧 Each envelope plays your personal voice recording.</p>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
