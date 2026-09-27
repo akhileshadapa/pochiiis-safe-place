@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#120c1f" />
+  <title>🌙 Pochiiii's Safe Place</title>
+
+  <!-- Google Fonts: Caveat (warm handwriting), DM Sans (clean text), Playfair Display (cinematic serif) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="lamp-off">
+  <!-- Interactive Canvas: Twinkling Night Sky & Warm Floating Dust Motes -->
+  <canvas id="starCanvas" class="stars-bg" aria-hidden="true"></canvas>
+
+  <!-- Floating Audio Controls (Top Right) -->
+  <aside class="global-controls" aria-label="Audio and ambiance controls">
+    <button id="soundToggleBtn" class="pill-btn sound-btn" aria-label="Toggle Sound Effects" title="Toggle gentle sound effects">
+      <span class="icon">🔊</span>
+      <span class="label">Sound: On</span>
+    </button>
+    <button id="ambientToggleBtn" class="pill-btn ambient-btn" aria-label="Toggle Night Ambiance" title="Toggle cozy rain & night ambiance">
+      <span class="icon">✨</span>
+      <span class="label">Ambiance: Off</span>
+    </button>
+  </aside>
+
+  <main id="app">
+    <!-- ========================================== -->
+    <!-- 1. OPENING SCREEN                          -->
+    <!-- ========================================== -->
+    <section id="welcomeScreen" class="screen active" aria-label="Welcome screen">
+      <div class="moon-ambient-halo" aria-hidden="true"></div>
+
+      <div class="welcome-card glassmorphism">
+        <div class="badge-tag">
+          <span class="sparkle">✧</span>
+          <span>A little corner of the world, built just for you</span>
+          <span class="sparkle">✧</span>
+        </div>
+
+        <div class="crescent-moon-icon" aria-hidden="true">☾</div>
+
+        <h1 class="welcome-title">
+          <span class="handwritten-title">Pochiiii's</span>
+          <span class="serif-title">Safe Place</span>
+        </h1>
+
+        <div class="welcome-text-flow">
+          <p class="greeting-lead">Hey, Pochiiii.</p>
+          <p>I know things haven't been easy lately.</p>
+          <p>So I made you a little place you can come to whenever you need it.</p>
+          <p class="soft-break">You don't have to reply.<br>You don't have to explain anything.</p>
+          <p>Just come here, take a breath, and stay for a while.</p>
+          <p class="comfort-highlight">You're not alone. <span class="heart-pulse">❤️</span></p>
+        </div>
+
+        <button id="enterRoomBtn" class="primary-glow-btn" data-enter aria-label="Enter my safe place">
+          <span class="btn-text">Enter my safe place</span>
+          <span class="btn-arrow">→</span>
+          <span class="btn-shimmer" aria-hidden="true"></span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- 2. COZY INTERACTIVE ROOM                   -->
+    <!-- ========================================== -->
+    <section id="roomScreen" class="screen" aria-label="Pochiiii's interactive room">
+      <div class="room-wrapper">
+
+        <!-- Room Header Navigation -->
+        <header class="room-nav-header">
+          <div class="room-title-badge">
+            <span class="room-title-text">🌙 Pochiiii's Room</span>
+            <span class="room-subtitle-text">explore by clicking anything in the room · discover little secrets</span>
+          </div>
+          <button id="exitRoomBtn" class="pill-btn back-to-stars-btn" data-back aria-label="Leave room to night sky">
+            <span>← Night sky</span>
+          </button>
+        </header>
+
+        <!-- 3D Diorama Room Stage with Mouse Parallax -->
+        <div id="interactiveRoom" class="room-stage" role="region" aria-label="Interactive cozy room">
+
+          <!-- Layered Architecture & Walls -->
+          <div class="room-architecture" aria-hidden="true">
+            <div class="wall-surface">
+              <div class="wall-wainscoting"></div>
+              <div class="wall-shadow-vignette"></div>
+            </div>
+
+            <!-- Soft Moonlight Ray Cutting Across the Room -->
+            <div class="moonlight-beam"></div>
+
+            <!-- Dynamic Bedside Lamp Ambient Glow -->
+            <div class="lamp-ambient-glow" id="lampGlow"></div>
+
+            <!-- Rich Timber Floor -->
+            <div class="floor-surface">
+              <div class="floor-baseboard"></div>
+              <div class="floor-plank-grid"></div>
+              <div class="floor-reflection-sheen"></div>
+            </div>
+          </div>
+
+          <!-- Hanging Fairy Lights with Warm Flickering Bulbs -->
+          <div class="fairy-lights-banner" aria-hidden="true">
+            <svg class="wire-svg" viewBox="0 0 1000 80" preserveAspectRatio="none">
+              <path d="M0,20 Q250,70 500,28 T1000,32" fill="none" stroke="rgba(255,225,180,0.3)" stroke-width="2"/>
+            </svg>
+            <div class="bulb-cluster" style="left: 10%; top: 30px;"><div class="bulb b1"></div><div class="bulb-halo"></div></div>
+            <div class="bulb-cluster" style="left: 22%; top: 48px;"><div class="bulb b2"></div><div class="bulb-halo"></div></div>
+            <div class="bulb-cluster" style="left: 36%; top: 44px;"><div class="bulb b3"></div><div class="bulb-halo"></div></div>
+            <div class="bulb-cluster" style="left: 50%; top: 28px;"><div class="bulb b4"></div><div class="bulb-halo"></div></div>
+            <div class="bulb-cluster" style="left: 64%; top: 38px;"><div class="bulb b5"></div><div class="bulb-halo"></div></div>
+            <div class="bulb-cluster" style="left: 78%; top: 32px;"><div class="bulb b6"></div><div class="bulb-halo"></div></div>
+            <div class="bulb-cluster" style="left: 90%; top: 29px;"><div class="bulb b7"></div><div class="bulb-halo"></div></div>
+          </div>
+
+          <!-- 1. 🌙 Interactive French Window -->
+          <button class="room-object window-frame" id="objWindow" data-action="open-window" aria-label="Look outside window into peaceful night sky">
+            <div class="window-panes">
+              <div class="window-sky-view">
+                <span class="win-star s1">✦</span>
+                <span class="win-star s2">·</span>
+                <span class="win-star s3">✦</span>
+                <span class="win-star s4">·</span>
+                <div class="win-moon">☾</div>
+                <div class="win-cloud c1"></div>
+                <div class="win-cloud c2"></div>
+                <div class="shooting-star-preview"></div>
+              </div>
+              <div class="window-frame-bars"></div>
+              <div class="window-sill">
+                <div class="window-plant">🌱</div>
+              </div>
+            </div>
+            <span class="object-tooltip">Look outside 🌙</span>
+          </button>
+
+          <!-- 2. 📸 Polaroid Memory Wall (Hung with Clips) -->
+          <div class="photo-wall-cluster" aria-label="Polaroid memory wall">
+            <div class="polaroid-twine-line" aria-hidden="true"></div>
+
+            <button class="polaroid-pin polaroid-1" data-action="open-gallery" aria-label="View photo memories: Late Night Talks">
+              <div class="pin-clip"></div>
+              <div class="polaroid-photo">
+                <img src="assets/photos/photo-01.jpg" alt="Memory preview 1" loading="lazy" />
+              </div>
+              <span class="polaroid-caption">late night talks ♡</span>
+            </button>
+
+            <button class="polaroid-pin polaroid-2" data-action="open-gallery" aria-label="View photo memories: Stargazing">
+              <div class="pin-clip"></div>
+              <div class="polaroid-photo">
+                <img src="assets/photos/photo-02.jpg" alt="Memory preview 2" loading="lazy" />
+              </div>
+              <span class="polaroid-caption">remember this? ✨</span>
+            </button>
+
+            <button class="polaroid-pin polaroid-3" data-action="open-gallery" aria-label="View photo memories: Sunset ocean">
+              <div class="pin-clip"></div>
+              <div class="polaroid-photo">
+                <img src="assets/photos/photo-04.jpg" alt="Memory preview 3" loading="lazy" />
+              </div>
+              <span class="polaroid-caption">our memories 📸</span>
+            </button>
+          </div>
+
+          <!-- Cozy Wooden Desk with Warm Shadow -->
+          <div class="desk-station" aria-label="Desk area">
+            <div class="desk-surface">
+
+              <!-- 3. 💌 Open When Keepsake Box -->
+              <button class="room-object letter-box" id="objLetters" data-action="open-letters" aria-label="Open When Box with 8 audio letters">
+                <div class="box-lid">
+                  <div class="box-ribbon-bow">🎀</div>
+                </div>
+                <div class="box-casing">
+                  <span class="box-label">Open When...</span>
+                </div>
+                <span class="object-badge">8 notes</span>
+                <span class="object-tooltip">Open When Box 💌</span>
+              </button>
+
+              <!-- 4. 📱 Smartphone with Live Notification Ping -->
+              <button class="room-object desk-phone" id="objPhone" data-action="open-phone" aria-label="Open phone to read our chat">
+                <div class="phone-casing">
+                  <div class="phone-screen-glance">
+                    <span class="chat-notch"></span>
+                    <span class="chat-preview-bubble">“Are you free?”</span>
+                    <span class="chat-dot-ping"></span>
+                  </div>
+                </div>
+                <span class="object-tooltip">Check phone 📱</span>
+              </button>
+
+              <!-- 5. 📖 Notebook ("Little Things") -->
+              <button class="room-object notebook-journal" id="objNotebook" data-action="open-notebook" aria-label="Open Little Things handwritten notebook">
+                <div class="journal-cover">
+                  <span class="journal-ribbon"></span>
+                  <span class="journal-pen">✏️</span>
+                  <div class="journal-label">
+                    <span>Little Things</span>
+                    <small>tap to read</small>
+                  </div>
+                </div>
+                <span class="object-tooltip">Little Things Notebook 📖</span>
+              </button>
+
+              <!-- Steaming Tea Mug -->
+              <div class="desk-decorations" aria-hidden="true">
+                <div class="steaming-cup" title="Warm chamomile tea">
+                  <span class="steam s1">~</span>
+                  <span class="steam s2">~</span>
+                  <span class="cup">🍵</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="desk-drawers" aria-hidden="true">
+              <div class="drawer-handle d1"></div>
+              <div class="drawer-handle d2"></div>
+            </div>
+          </div>
+
+          <!-- 6. 🕯️ Cozy Bedside Lamp (Interactive Lighting Switch) -->
+          <button class="room-object bedside-lamp" id="objLamp" data-action="toggle-lamp" aria-label="Click lamp to switch warm lighting on or off">
+            <div class="lamp-shade">
+              <div class="lamp-bulb-core"></div>
+            </div>
+            <div class="lamp-stand"></div>
+            <div class="lamp-base"></div>
+            <div class="lamp-switch-cord" title="Click to pull switch"></div>
+            <span class="object-tooltip">Lamp (Click to switch light) 🕯️</span>
+          </button>
+
+          <!-- Floating Sticky Note from Lamp (Revealed on click) -->
+          <div class="lamp-sticky-note" id="lampStickyNote" aria-hidden="true">
+            <button class="sticky-close" id="closeStickyBtn" aria-label="Close note">×</button>
+            <div class="sticky-pin">📍</div>
+            <p class="sticky-lead">You're allowed to rest.</p>
+            <p>You don't have to solve everything tonight.</p>
+            <p class="sticky-footer">One small step is still a step. 🌷</p>
+          </div>
+
+          <!-- 7. 🧸 Teddy Bear (Emergency Hug Plush) -->
+          <button class="room-object cuddly-teddy" id="objTeddy" data-action="open-hug" aria-label="Hug the teddy bear">
+            <div class="teddy-ears">
+              <span class="ear left-ear"></span>
+              <span class="ear right-ear"></span>
+            </div>
+            <div class="teddy-head">
+              <span class="eye left-eye">•</span>
+              <span class="teddy-snout">
+                <span class="nose">▲</span>
+                <span class="smile">ᴗ</span>
+              </span>
+              <span class="eye right-eye">•</span>
+              <span class="blush left-blush"></span>
+              <span class="blush right-blush"></span>
+            </div>
+            <div class="teddy-torso">
+              <span class="heart-patch">♡</span>
+            </div>
+            <div class="teddy-paws">
+              <span class="paw left-paw"></span>
+              <span class="paw right-paw"></span>
+            </div>
+            <span class="teddy-bubble-hint">Need a hug? 🫂</span>
+            <span class="object-tooltip">Teddy Bear 🧸</span>
+          </button>
+
+          <!-- Cozy Floor Rug & Potted Fern -->
+          <div class="cozy-rug" aria-hidden="true"></div>
+
+          <div class="floor-plant" aria-hidden="true">
+            <div class="plant-leaves">🌿</div>
+            <div class="plant-pot">🪴</div>
+          </div>
+
+          <!-- 8. ✨ HIDDEN SECRET EASTER EGG (Discreet Star by the Floorboards) -->
+          <button class="hidden-secret-star" id="secretStarObj" data-action="open-secret" aria-label="A tiny mysterious glowing star">
+            <span class="secret-twinkle">✦</span>
+            <span class="object-tooltip">A little secret... ✨</span>
+          </button>
+
+        </div> <!-- /interactiveRoom -->
+
+        <!-- Mobile Touch Shelf for Easy Smartphone Access -->
+        <nav class="mobile-quick-shelf" aria-label="Quick room navigation for mobile">
+          <button class="quick-pill" data-action="open-gallery"><span>📸</span> Photos</button>
+          <button class="quick-pill" data-action="open-letters"><span>💌</span> Open When</button>
+          <button class="quick-pill" data-action="open-notebook"><span>📖</span> Notebook</button>
+          <button class="quick-pill" data-action="open-phone"><span>📱</span> Chat</button>
+          <button class="quick-pill" data-action="open-hug"><span>🧸</span> Hug</button>
+          <button class="quick-pill" data-action="open-window"><span>🌙</span> Window</button>
+        </nav>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================== -->
+  <!-- MODALS & FULL-SCREEN OVERLAYS              -->
+  <!-- ========================================== -->
+  <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal-container" role="dialog" aria-modal="true">
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">×</button>
+      <div id="modalDynamicBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Floating Heart Shower Container (For Teddy Hug) -->
+  <div id="heartContainer" class="heart-burst-layer" aria-hidden="true"></div>
+
+  <!-- ========================================== -->
+  <!-- TEMPLATES FOR DYNAMIC EXPERIENCES          -->
+  <!-- ========================================== -->
+
+  <!-- Template: Memory Scrapbook Gallery -->
+  <template id="galleryTemplate">
+    <div class="gallery-experience">
+      <div class="experience-header">
+        <span class="eyebrow-chip">✦ Scrapbook Of Us ✦</span>
+        <h2 class="handwritten-heading">Memory Wall</h2>
+        <p class="experience-subtext">Clicking a photo brought you here. Take your time and scroll slowly through these little pieces of warmth. ♡</p>
+      </div>
+
+      <div class="scrapbook-gallery-flow" id="scrapbookContainer"></div>
+
+      <p class="scrapbook-footer-note">
+        ✨ <em>"The best memories never fade — they keep us warm whenever the world feels a little cold."</em>
+      </p>
+    </div>
+  </template>
+
+  <!-- Template: Open When 8 Envelopes Box -->
+  <template id="lettersTemplate">
+    <div class="letters-experience">
+      <div class="experience-header">
+        <span class="eyebrow-chip">✦ For The Days You Need A Little Extra Love ✦</span>
+        <h2 class="handwritten-heading">Open When…</h2>
+        <p class="experience-subtext">Pick the one your heart needs most right now. Put your headphones on, take a deep breath, and let these words be with you. ♡</p>
+      </div>
+
+      <div class="envelopes-grid" id="envelopesGrid"></div>
+
+      <div class="letters-reminder-banner">
+        <span class="headphone-icon">🎧</span>
+        <span>Each envelope opens a private voice note recorded just for you.</span>
+      </div>
+    </div>
+  </template>
+
+  <!-- Template: Dedicated Voice Note Player Screen -->
+  <template id="audioPlayerTemplate">
+    <div class="audio-experience">
+      <button class="back-to-envelopes-btn" id="backToEnvelopesBtn" aria-label="Back to envelopes">
+        ← Back to envelopes
+      </button>
+
+      <div class="voice-card glassmorphism">
+        <div class="envelope-badge-icon" id="audioIcon">💌</div>
+        <span class="eyebrow-chip">Personal Voice Note</span>
+        <h3 class="handwritten-heading-medium" id="audioTitle">Open When You Need A Hug</h3>
+
+        <div class="personal-audio-message" id="audioPersonalMessage">
+          "Take your time. Put your headphones on. I'm right here with you. ♡"
+        </div>
+
+        <!-- Canvas Audio Waveform Visualizer -->
+        <div class="waveform-container">
+          <canvas id="waveformCanvas" width="480" height="90" aria-label="Audio visualizer waveform"></canvas>
+        </div>
+
+        <!-- Custom Audio Player Controller -->
+        <div class="custom-player-controls">
+          <audio id="actualAudio" preload="none"></audio>
+
+          <div class="playback-timeline">
+            <span class="time-label" id="currentTimeLabel">0:00</span>
+            <div class="progress-bar-wrapper" id="progressTrack">
+              <div class="progress-fill" id="progressFill"></div>
+              <div class="progress-scrubber" id="progressScrubber"></div>
+            </div>
+            <span class="time-label" id="durationTimeLabel">0:00</span>
+          </div>
+
+          <div class="player-button-row">
+            <button class="player-action-btn secondary" id="restartAudioBtn" title="Restart recording">
+              ↺ 0s
+            </button>
+
+            <button class="player-action-btn play-main" id="playPauseAudioBtn" aria-label="Play voice note">
+              <span id="playIcon">▶</span>
+            </button>
+
+            <button class="player-action-btn secondary" id="audioSpeedBtn" title="Audio Speed">
+              1.0x
+            </button>
+          </div>
+
+          <div class="audio-status-feedback" id="audioStatusFeedback">
+            <small>Click Play to listen. (If your MP3 file is still to be added, a gentle synthesizer lullaby plays as a cozy placeholder!)</small>
+          </div>
+        </div>
+
+        <p class="voice-signoff">♡ from your best friend</p>
+      </div>
+    </div>
+  </template>
+
+  <!-- Template: Teddy Bear Internet Hug -->
+  <template id="hugTemplate">
+    <div class="hug-experience">
+      <div class="hug-teddy-visual">
+        <div class="giant-cuddly-teddy">
+          <div class="teddy-face-large">
+            <span class="hug-eyes">•ᴗ•</span>
+            <span class="hug-blush"></span>
+          </div>
+          <div class="hug-arms hugging"></div>
+        </div>
+      </div>
+
+      <div class="hug-text-block">
+        <h2 class="handwritten-heading">Come here, Pochiiii. 🫂</h2>
+        <p class="hug-lead">Consider this your emergency internet hug.</p>
+        <p class="hug-body">
+          You don't have to carry the whole world on your shoulders today.
+          Take a deep breath, loosen your jaw, drop your shoulders, and stay right here as long as you need.
+        </p>
+        <p class="hug-comfort">You are safe. You are cared for. Always. ♡</p>
+      </div>
+
+      <button id="sendAnotherHugBtn" class="primary-glow-btn hug-btn">
+        <span>Send more warmth & hugs 💕</span>
+      </button>
+    </div>
+  </template>
+
+  <!-- Template: Little Things Notebook -->
+  <template id="notebookTemplate">
+    <div class="notebook-experience">
+      <div class="notebook-spine-binding"></div>
+      <div class="notebook-booklet">
+        <div class="notebook-header-bar">
+          <span class="doodle-flower">🌸</span>
+          <h2 class="handwritten-heading notebook-title">Little Things</h2>
+          <span class="doodle-stars">✨</span>
+        </div>
+
+        <p class="notebook-instruction">Things I hope you keep in your heart, especially on the harder days:</p>
+
+        <div class="notebook-ruled-pages" id="notebookPagesContainer"></div>
+
+        <div class="notebook-footer-doodle">
+          <span>✎ written with love, always.</span>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Template: Phone Chat Simulator -->
+  <template id="phoneTemplate">
+    <div class="phone-experience">
+      <div class="phone-device-shell">
+        <div class="phone-top-bar">
+          <span class="phone-time" id="chatTimeNow">11:11</span>
+          <div class="phone-speaker-camera"></div>
+          <span class="phone-battery">100% 🔋</span>
+        </div>
+
+        <div class="chat-app-header">
+          <div class="chat-avatar">🧸</div>
+          <div class="chat-contact-info">
+            <span class="contact-name">akhiiiiii 🫂</span>
+            <span class="contact-status" id="chatStatusText">online</span>
+          </div>
+        </div>
+
+        <div class="chat-messages-container" id="chatMessagesContainer"></div>
+
+        <div class="chat-typing-indicator" id="chatTypingIndicator">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <small>typing...</small>
+        </div>
+
+        <div class="chat-input-bar">
+          <div class="fake-input-box">
+            <span>Always here to listen...</span>
+          </div>
+          <button class="fake-send-btn" id="replayChatBtn" title="Replay conversation">↺</button>
+        </div>
+      </div>
+
+      <p class="phone-customize-hint">
+        💡 <em>This conversation is easily customized in <code>script.js</code> with your own inside jokes!</em>
+      </p>
+    </div>
+  </template>
+
+  <!-- Template: Peaceful Window Night Scene -->
+  <template id="windowTemplate">
+    <div class="peaceful-window-experience">
+      <div class="night-sky-canopy">
+        <div class="night-moon-large">☾</div>
+        <div class="night-shooting-star n1"></div>
+        <div class="night-shooting-star n2"></div>
+        <div class="floating-nebula-mist"></div>
+      </div>
+
+      <div class="night-calm-content">
+        <span class="eyebrow-chip">✦ Peaceful Starlight ✦</span>
+        <h2 class="handwritten-heading">Stay here for a minute.</h2>
+
+        <div class="night-reflections">
+          <p class="fade-line line-1">Put your phone down for a second.</p>
+          <p class="fade-line line-2">Take a slow, deep breath.</p>
+          <p class="fade-line line-3">Look at the quiet sky.</p>
+          <p class="fade-line line-4">You don't have to figure out tomorrow tonight.</p>
+          <p class="fade-line line-5 highlight-night">Whatever today was, it is allowed to end here.</p>
+        </div>
+
+        <!-- Calming Guided Breathing Circle -->
+        <div class="breathing-guide-box">
+          <div class="breathing-circle-pacer" id="breathingCircle">
+            <span class="breathing-instruction-text" id="breathingText">Breathe in...</span>
+          </div>
+          <small class="breathing-subtext">Slow, gentle breaths. 4s Inhale · 4s Hold · 4s Exhale</small>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Template: Hidden Secret Constellation Scene -->
+  <template id="secretTemplate">
+    <div class="secret-experience">
+      <div class="secret-starfield">
+        <div class="secret-constellation"></div>
+      </div>
+
+      <div class="secret-letter-card glassmorphism">
+        <div class="secret-badge">✦ You found our little secret ✦</div>
+
+        <div class="secret-letter-body">
+          <p class="secret-stanza">If life feels heavy right now,<br>you don't have to carry everything today.</p>
+          <p class="secret-stanza">Take it one day at a time.</p>
+          <p class="secret-stanza">And whenever you need a little corner of the world where you're understood...</p>
+          <p class="secret-stanza emphasis">you know where to find me. 🫶</p>
+        </div>
+
+        <div class="secret-signoff-line" id="secretSignoff">
+          — Your idiot best friend ❤️
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
